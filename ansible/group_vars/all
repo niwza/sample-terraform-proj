@@ -1,0 +1,3 @@
+proj_name: sample_proj
+locale: en_US.UTF-8
+database_port: 5432

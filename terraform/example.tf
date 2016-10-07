@@ -86,10 +86,6 @@ resource "aws_instance" "example" {
     ansibleFilter = "sample"
     ansibleNodeType = "db"
   }
-
-#  provisioner "local-exec" {
-#    command = "echo ${aws_instance.example.public_ip} > file.txt"
-#  }
 }
 
 # assign an elastic ip to an instance

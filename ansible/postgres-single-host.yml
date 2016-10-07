@@ -8,11 +8,16 @@
 
 - hosts: all
   gather_facts: false
-  become: true
+  become: True
   tasks:
     - name: Install python2
       raw: "apt-get -qq update && apt-get -yq install python python-simplejson"
 
 - hosts: db
+  vars_files:
+    - secrets.yml
   roles:
     - common
+    - role: postgres
+      database_name: "{{ proj_name }}"
+      database_user: "{{ proj_name }}"

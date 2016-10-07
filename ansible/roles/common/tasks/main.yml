@@ -15,4 +15,4 @@
   become: true
 
 - name: Check ansible facts
-  debug: var=hostvars[inventory_hostname] verbosity=4
+  debug: var=hostvars[inventory_hostname] verbosity=-100
