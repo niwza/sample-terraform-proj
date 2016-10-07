@@ -13,6 +13,3 @@
 - name: Set internal DNS name as hostname
   shell: "hostnamectl set-hostname {{ ec2_private_dns_name }}"
   become: true
-
-- name: Check ansible facts
-  debug: var=hostvars[inventory_hostname] verbosity=-100

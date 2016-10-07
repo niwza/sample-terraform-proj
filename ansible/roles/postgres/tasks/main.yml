@@ -7,10 +7,12 @@
     - libpq-dev
     - postgresql=9.5*
     - python-psycopg2
+    - unzip
 
 
 - name: ensure the PostgreSQL service is running
   service: name=postgresql state=started  enabled=yes
+
 
 - name: copy configuration file
   copy: >
@@ -28,12 +30,25 @@
   notify: restart postgres
 
 
-- name: create a user
+- name: create database user
   postgresql_user:
     name: "{{ database_user }}"
     password: "{{ db_pass }}"
   become: True
   become_user: postgres
+
+
+- name: copy postgress credentials
+  template: src=.pgpass.j2 dest={{ hostvars[inventory_hostname].ansible_user_dir }}/.pgpass mode=600
+
+
+- name: download sample database
+  unarchive:
+    src: "http://www.sportsdb.org/modules/sd/assets/downloads/sportsdb_sample_postgresql.zip"
+    copy: no
+    dest: /tmp
+    list_files: yes
+  register: database_dump
 
 
 - name: create the database
@@ -46,3 +61,4 @@
     template: template0
   become: True
   become_user: postgres
+  notify: load database
