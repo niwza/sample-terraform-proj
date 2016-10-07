@@ -38,7 +38,7 @@ $terraform apply
 Terraform creates an AWS instance with Ubuntu 16.04 and outputs it's EIP.
 
 #### Provision AWS instance with ansible ####
-** ATTENTION!!! **
+**ATTENTION!!!**
 Ansible utilizes dynamic inventory script. Instances are added to an inventory by "sample" tag. If your AWS infrastructure has other instances with this tag, it might be unsafe to run playbook. Before running ansible playbook you can verify that only those instances are added which were provisioned on a previous step.
 ```
 $cd ansible/hosts
